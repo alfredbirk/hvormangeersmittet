@@ -75,4 +75,5 @@
   font-size: 1em;
   @media all and (min-width: 48em) {
     font-size: 1.4em;
+  }
 }
