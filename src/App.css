@@ -61,8 +61,10 @@
 }
 
 .Number {
-  font-size: 18rem;
+  font-size: 8rem;
   font-weight: bold;
+  @media all and (min-width: 48em) {
+    font-size: 18rem;
 }
 
 .Description {
@@ -71,4 +73,6 @@
   animation-fill-mode: both;
   color: lightgray;
   font-size: 1em;
+  @media all and (min-width: 48em) {
+    font-size: 1.4em;
 }
