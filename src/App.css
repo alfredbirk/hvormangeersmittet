@@ -65,6 +65,7 @@
   font-weight: bold;
   @media all and (min-width: 48em) {
     font-size: 18rem;
+  }
 }
 
 .Description {
