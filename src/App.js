@@ -11,14 +11,14 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'https://www.vg.no/spesial/2020/corona-viruset/data/norway/',
+        'https://redutv-api.vg.no/corona/v1/front/topbox?region=municipality',
       );
       setData(result.data);
     };
     fetchData();
   }, []);
   
-  if (!data.totals) {
+  if (!data.tableOverview) {
     return null
   }
 
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Container">
-          <CountUp start={0} end={data.totals.confirmed} delay={0}>
+          <CountUp start={0} end={data.tableOverview.totals.confirmed} delay={0}>
             {({ countUpRef }) => (
               <div>
                 <div className="Number" ref={countUpRef} />
