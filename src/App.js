@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { useCountUp } from 'react-countup';
 import CountUp from 'react-countup';
 import axios from 'axios';
 
+const TIME_REFRESH = 1000 * 60; // 1min
+
+const fetchData = async (setData) => {
+  const result = await axios('https://redutv-api.vg.no/corona/v1/front/topbox?region=municipality');
+  setData(result.data);
+};
+
 function App() {
-  const [data, setData] = useState({ hits: [] });
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        'https://redutv-api.vg.no/corona/v1/front/topbox?region=municipality',
-      );
-      setData(result.data);
-    };
-    fetchData();
+    fetchData(setData);
+
+    const interval = setInterval(() => {
+      fetchData(setData);
+    }, TIME_REFRESH);
+    
+    return () => clearInterval(interval);
   }, []);
-  
+
   if (!data.tableOverview) {
     return null
   }
-
-
 
   return (
     <div className="App">
