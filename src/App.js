@@ -6,7 +6,7 @@ import axios from 'axios';
 const TIME_REFRESH = 1000 * 60; // 1min
 
 const fetchData = async (setData) => {
-  const result = await axios('http://api.covid19api.com/total/country/norway/status/confirmed');
+  const result = await axios('https://api.covid19api.com/total/country/norway/status/confirmed');
   setData(result.data);
 };
 
