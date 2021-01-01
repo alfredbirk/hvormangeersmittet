@@ -6,7 +6,7 @@ import axios from 'axios';
 const TIME_REFRESH = 1000 * 60; // 1min
 
 const fetchData = async (setData) => {
-  const result = await axios('https://api.covid19api.com/total/country/norway/status/confirmed');
+  const result = await axios('https://dh.nrk.no/coronavirus-api/daily-status/everviz/confirmed-fhi');
   setData(result.data);
 };
 
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Container">
-          <CountUp start={0} end={data[data.length-1].Cases} delay={0}>
+          <CountUp start={0} end={data[data.length-1][1]} delay={0}>
             {({ countUpRef }) => (
               <div>
                 <div className="Number" ref={countUpRef} />
