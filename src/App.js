@@ -6,7 +6,7 @@ import axios from 'axios';
 const TIME_REFRESH = 1000 * 60; // 1min
 
 const fetchData = async (setData) => {
-  const result = await axios('https://redutv-api.vg.no/corona/v1/front/topbox?region=municipality');
+  const result = await axios('https://redutv-api.vg.no/corona/v1/areas/country/key');
   setData(result.data);
 };
 
@@ -23,7 +23,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!data.tableOverview) {
+  if (!data.meta) {
     return null
   }
 
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Container">
-          <CountUp start={0} end={data.tableOverview.totals.confirmed} delay={0}>
+          <CountUp start={0} end={data.meta.total.cases} delay={0}>
             {({ countUpRef }) => (
               <div>
                 <div className="Number" ref={countUpRef} />
