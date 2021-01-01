@@ -6,12 +6,12 @@ import axios from 'axios';
 const TIME_REFRESH = 1000 * 60; // 1min
 
 const fetchData = async (setData) => {
-  const result = await axios('https://redutv-api.vg.no/corona/v1/areas/country/key');
+  const result = await axios('http://api.covid19api.com/total/country/norway/status/confirmed');
   setData(result.data);
 };
 
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData(setData);
@@ -22,8 +22,8 @@ function App() {
     
     return () => clearInterval(interval);
   }, []);
-
-  if (!data.meta) {
+  
+  if (!data || data.length === 0) {
     return null
   }
 
@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="Container">
-          <CountUp start={0} end={data.meta.total.cases} delay={0}>
+          <CountUp start={0} end={data[data.length-1].Cases} delay={0}>
             {({ countUpRef }) => (
               <div>
                 <div className="Number" ref={countUpRef} />
